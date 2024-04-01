@@ -30,7 +30,6 @@ open class AppiumSetup {
             caps.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, activityName)
             caps.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true)
             caps.setCapability("appium:uiautomator2ServerLaunchTimeout", 60000)
-//            caps.setCapability("appium:ignoreHiddenApiPolicyError", true)
             driver = AndroidDriver(URL(serverUrl), caps)
         }
 

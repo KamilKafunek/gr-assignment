@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test
 
 class CMICalculatorTests : AppiumSetup() {
     private val calculatorScreen = CalculatorScreen(driver)
+    private val detailsScreen = DetailsScreen(driver)
 
     @Test
     fun `Check buttons and labels are visible`() {
@@ -21,8 +22,6 @@ class CMICalculatorTests : AppiumSetup() {
 
     @Test
     fun `Check of values calculation when EMI selected `() {
-//        calculatorScreen.clickCMICalculationButton()
-
         if (calculatorScreen.isEMISelected()) {
             println("The EMI radio button is selected.")
             calculatorScreen.enterLoanAmount("1000")
@@ -39,5 +38,14 @@ class CMICalculatorTests : AppiumSetup() {
         assertTrue(calculatorScreen.checkTotalInterestResult(), "The total interest amount does not match the expected result.")
         assertTrue(calculatorScreen.checkProcessingFeeResult(), "The processing fee amount does not match the expected result.")
         assertTrue(calculatorScreen.checkTotalPaymentResult(), "The total payment amount does not match the expected result.")
+    }
+
+    @Test
+    fun `Verifying the EMI payment calculation according to the months in the calculation history`() {
+        calculatorScreen.clickNavigationDrawerButton()
+        calculatorScreen.clickHistoryTabButton()
+        detailsScreen.clickFirstHistoryCalculation()
+        detailsScreen.isEmiDetailsLabelVisible()
+        detailsScreen.verifyEMIHistory()
     }
 }

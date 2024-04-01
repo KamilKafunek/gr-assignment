@@ -1,4 +1,3 @@
-import io.appium.java_client.android.AndroidDriver
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions
@@ -7,7 +6,6 @@ import org.openqa.selenium.support.ui.WebDriverWait
 class CalculatorScreen(private val driver: WebDriver) {
     private val locators = Locators()
     private val wait = WebDriverWait(driver, 30)
-    val action = Actions(driver)
 
     fun isCMICalculatorButtonVisible(): Boolean {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locators.startButton)).isDisplayed
@@ -114,5 +112,15 @@ class CalculatorScreen(private val driver: WebDriver) {
         val monthlyEmiAmount = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.totalPaymentAmount))
         val correctAmount = monthlyEmiAmount.text
         return "1,026.04" == correctAmount
+    }
+
+    fun clickNavigationDrawerButton() {
+        val button = wait.until(ExpectedConditions.elementToBeClickable(locators.navigationDrawer))
+        button.click()
+    }
+
+    fun clickHistoryTabButton() {
+        val button = wait.until(ExpectedConditions.elementToBeClickable(locators.historyTab))
+        button.click()
     }
 }

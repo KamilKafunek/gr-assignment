@@ -1,3 +1,4 @@
+import io.appium.java_client.MobileBy
 import org.openqa.selenium.By
 
 class Locators {
@@ -91,4 +92,43 @@ class Locators {
      * Total payment result
      */
     val totalPaymentAmount: By = By.id("com.continuum.emi.calculator:id/total_payment_result")
+
+    /**
+     * Navigation drawer
+     */
+    val navigationDrawer: By = MobileBy.AccessibilityId("Open navigation drawer")
+
+    /**
+     * History tab
+     */
+    val historyTab: By = By.xpath("//android.widget.CheckedTextView[@resource-id=\"com.continuum.emi.calculator:id/design_menu_item_text\" and @text=\"History\"]")
+
+    /**
+     * First history calculation
+     */
+    val firstCalculation: By = By.id("com.continuum.emi.calculator:id/layoutFirst")
+
+    /**
+     * Period result
+     */
+    val periodAmount: By = By.id("com.continuum.emi.calculator:id/period_result")
+
+    /**
+     * EMI Details label
+     */
+    val emiDetailsLabel: By = By.xpath("//android.widget.TextView[@text=\"EMI Details\"]")
+
+    /**
+     * Principal amount by month
+     */
+    fun currentPrincipal(month: Int): By {
+        return By.xpath("//android.widget.TextView[@resource-id=\"com.continuum.emi.calculator:id/tvMonths_lv\" and @text=\"$month\"]/following-sibling::android.widget.TextView[1]")
+    }
+
+    /**
+     * Interest amount by month
+     */
+    fun currentInterest(month: Int): By {
+        return By.xpath("//android.widget.TextView[@resource-id=\"com.continuum.emi.calculator:id/tvMonths_lv\" and @text=\"$month\"]/following-sibling::android.widget.TextView[2]")
+    }
 }
