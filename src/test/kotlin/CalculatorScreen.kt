@@ -1,5 +1,4 @@
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 
@@ -7,15 +6,29 @@ class CalculatorScreen(private val driver: WebDriver) {
     private val locators = Locators()
     private val wait = WebDriverWait(driver, 30)
 
-    fun isCMICalculatorButtonVisible(): Boolean {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locators.startButton)).isDisplayed
-    }
-
     fun clickCMICalculationButton() {
         val button = wait.until(ExpectedConditions.elementToBeClickable(locators.startButton))
         button.click()
     }
 
+    fun clickResetButton() {
+        val button = wait.until(ExpectedConditions.elementToBeClickable(locators.resetButton))
+        button.click()
+    }
+
+    fun selectPeriod() {
+        val button = wait.until(ExpectedConditions.elementToBeClickable(locators.periodLabel))
+        button.click()
+    }
+
+    fun selectInterest() {
+        val button = wait.until(ExpectedConditions.elementToBeClickable(locators.interestLabel))
+        button.click()
+    }
+    fun selectAmount() {
+        val button = wait.until(ExpectedConditions.elementToBeClickable(locators.loanAmountLabel))
+        button.click()
+    }
     fun isResetButtonVisible(): Boolean {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locators.resetButton)).isDisplayed
     }
@@ -47,6 +60,24 @@ class CalculatorScreen(private val driver: WebDriver) {
     fun isEMISelected(): Boolean {
         val emiRadioButton = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.emiLabel))
         val isChecked = emiRadioButton.getAttribute("checked")
+        return "true" == isChecked
+    }
+
+    fun isPeriodSelected(): Boolean {
+        val periodRadioButton = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.periodLabel))
+        val isChecked = periodRadioButton.getAttribute("checked")
+        return "true" == isChecked
+    }
+
+    fun isInterestSelected(): Boolean {
+        val interestRadioButton = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.interestLabel))
+        val isChecked = interestRadioButton.getAttribute("checked")
+        return "true" == isChecked
+    }
+
+    fun isAmountSelected(): Boolean {
+        val amountRadioButton = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.loanAmountLabel))
+        val isChecked = amountRadioButton.getAttribute("checked")
         return "true" == isChecked
     }
 
@@ -85,33 +116,40 @@ class CalculatorScreen(private val driver: WebDriver) {
         println("Entered processing fee amount: $amount")
     }
 
+    fun enterEmiAmount(amount: String) {
+        val emiFieldById = wait.until(ExpectedConditions.elementToBeClickable(locators.emiField))
+        emiFieldById.clear()
+        emiFieldById.sendKeys(amount)
+        println("Entered EMI amount: $amount")
+    }
+
     fun clickCalculateButton() {
         val calculateButton = wait.until(ExpectedConditions.elementToBeClickable(locators.calculateButton))
         calculateButton.click()
     }
 
-    fun checkMonthlyEmiResult(): Boolean {
+    fun checkMonthlyEmiResult(expectedEmiAmount: String): Boolean {
         val monthlyEmiAmount = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.monthlyEmiAmount))
         val correctAmount = monthlyEmiAmount.text
-        return "34.2" == correctAmount
+        return expectedEmiAmount == correctAmount
     }
 
-    fun checkTotalInterestResult(): Boolean {
-        val monthlyEmiAmount = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.totalInterestAmount))
-        val correctAmount = monthlyEmiAmount.text
-        return "26.04" == correctAmount
+    fun checkTotalInterestResult(expectedTotalInterest: String): Boolean {
+        val totalInterestAmount = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.totalInterestAmount))
+        val correctAmount = totalInterestAmount.text
+        return expectedTotalInterest == correctAmount
     }
 
-    fun checkProcessingFeeResult(): Boolean {
-        val monthlyEmiAmount = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.processingFeeAmount))
-        val correctAmount = monthlyEmiAmount.text
-        return "100" == correctAmount
+    fun checkProcessingFeeResult(expectedProcessingFee: String): Boolean {
+        val processingFeeAmount = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.processingFeeAmount))
+        val correctAmount = processingFeeAmount.text
+        return expectedProcessingFee == correctAmount
     }
 
-    fun checkTotalPaymentResult(): Boolean {
-        val monthlyEmiAmount = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.totalPaymentAmount))
-        val correctAmount = monthlyEmiAmount.text
-        return "1,026.04" == correctAmount
+    fun checkTotalPaymentResult(expectedTotalPayment: String): Boolean {
+        val totalPaymentAmount = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.totalPaymentAmount))
+        val correctAmount = totalPaymentAmount.text
+        return expectedTotalPayment == correctAmount
     }
 
     fun clickNavigationDrawerButton() {
