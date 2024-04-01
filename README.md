@@ -1,7 +1,6 @@
-# gr-assignment
-# Spustenie Testov pre CMI Calculator
+# Spustenie Testov pre EMI Calculator
 
-Tento README poskytuje postup na spustenie testov pre aplikáciu CMI Calculator.
+Tento README poskytuje postup na spustenie testov pre aplikáciu EMI Calculator.
 
 ## Predpoklady
 
@@ -36,5 +35,5 @@ Po dokončení predpokladov môžete pokračovať v spustení testov nasledujúc
 
 3. **Spustenie Testov v IntelliJ IDEA**
    - Otvorte projekt
-   - Spustite testy nachádzajúce sa v súbore `CMICalculatorTests.kt`.
+   - Spustite testy nachádzajúce sa v súbore `EmiCalculatorTests.kt`.
 
