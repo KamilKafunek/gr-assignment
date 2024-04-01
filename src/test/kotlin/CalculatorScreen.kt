@@ -6,7 +6,7 @@ class CalculatorScreen(private val driver: WebDriver) {
     private val locators = Locators()
     private val wait = WebDriverWait(driver, 30)
 
-    fun clickCMICalculationButton() {
+    fun clickEmiCalculationButton() {
         val button = wait.until(ExpectedConditions.elementToBeClickable(locators.startButton))
         button.click()
     }
@@ -49,7 +49,7 @@ class CalculatorScreen(private val driver: WebDriver) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locators.periodLabel)).isDisplayed
     }
 
-    fun isEMILabelVisible(): Boolean {
+    fun isEmiLabelVisible(): Boolean {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locators.emiLabel)).isDisplayed
     }
 
@@ -57,7 +57,7 @@ class CalculatorScreen(private val driver: WebDriver) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locators.processingFeeLabel)).isDisplayed
     }
 
-    fun isEMISelected(): Boolean {
+    fun isEmiSelected(): Boolean {
         val emiRadioButton = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.emiLabel))
         val isChecked = emiRadioButton.getAttribute("checked")
         return "true" == isChecked

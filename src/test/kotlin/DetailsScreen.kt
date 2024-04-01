@@ -27,7 +27,7 @@ class DetailsScreen(private val driver: WebDriver) {
                         "new UiSelector().text(\"$month\"))"))
     }
 
-    fun verifyEMIHistory() {
+    fun verifyEmiHistory() {
         val totalMonths = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.periodAmount)).text.toInt()
         val monthlyEmiAmount = wait.until(ExpectedConditions.visibilityOfElementLocated(locators.monthlyEmiAmount)).text
 

@@ -5,21 +5,21 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class CMICalculatorTests : AppiumSetup() {
+class EmiCalculatorTests : AppiumSetup() {
     private val calculatorScreen = CalculatorScreen(driver)
     private val detailsScreen = DetailsScreen(driver)
 
     @Test
     @Order(1)
     fun `Check buttons and labels are visible`() {
-        calculatorScreen.clickCMICalculationButton()
+        calculatorScreen.clickEmiCalculationButton()
         assertAll("Check visibility of all elements",
             { assertTrue(calculatorScreen.isResetButtonVisible(), "Reset button should be visible.") },
             { assertTrue(calculatorScreen.isCalculateButtonVisible(), "Calculate button should be visible.") },
             { assertTrue(calculatorScreen.isLoanAmountLabelVisible(), "Loan amount label should be visible.") },
             { assertTrue(calculatorScreen.isInterestLabelVisible(), "Interest label should be visible.") },
             { assertTrue(calculatorScreen.isPeriodLabelVisible(), "Period label should be visible.") },
-            { assertTrue(calculatorScreen.isEMILabelVisible(), "EMI label should be visible.") },
+            { assertTrue(calculatorScreen.isEmiLabelVisible(), "EMI label should be visible.") },
             { assertTrue(calculatorScreen.isProcessingFeeLabelVisible(), "Processing Fee label should be visible.") }
         )
     }
@@ -27,7 +27,7 @@ class CMICalculatorTests : AppiumSetup() {
     @Test
     @Order(2)
     fun `Check of values calculation when EMI is selected `() {
-        if (calculatorScreen.isEMISelected()) {
+        if (calculatorScreen.isEmiSelected()) {
             println("The EMI radio button is selected.")
             calculatorScreen.enterLoanAmount("1000")
             calculatorScreen.enterInterestAmount("2")
@@ -127,6 +127,6 @@ class CMICalculatorTests : AppiumSetup() {
         calculatorScreen.clickHistoryTabButton()
         detailsScreen.clickFirstHistoryCalculation()
         detailsScreen.isEmiDetailsLabelVisible()
-        detailsScreen.verifyEMIHistory()
+        detailsScreen.verifyEmiHistory()
     }
 }
